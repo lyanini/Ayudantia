@@ -28,10 +28,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$statement = $conexion->prepare('SELECT * FROM usuarios WHERE usuario = :usuario LIMIT 1');
 		$statement->execute(array(':usuario' => $usuario)); 
 		$resultado = $statement->fetch();
+		//comprobar consulta e ingresos
+		//var_dump($resultado);
 
 		if ($resultado != FALSE) {
-		 	$echo
-		 } 
+		 	$errores .= '<li>Nombre de usuario ya existe</li>';
+		} 
+
+		$password =hash('sha512', $password);
+		$password2 =hash('sha512', $password2);
+		//echo "$usuario"."-"." $password"."-"."$password2";
+
+		if($password != $password2){
+			$errores .= '<li>Contraseñas no coinsiden</li>';
+		}
+
+		if($errores == ''){
+			$statement = $conexion->prepare('INSERT INTO usuarios (id, usuario, pass) VALUES (NULL, :usuario, :pass)');
+			$statement->execute(array(':usuario' => $usuario, ':pass' => $password));
+
+		}
+
+		header('Location: login.php');
 	}
 }
 
