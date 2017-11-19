@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>jaimeamor</title>
+	<title>Datos</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
 </head>
